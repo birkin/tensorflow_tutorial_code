@@ -37,3 +37,30 @@ y_train = y_scaler.transform(y_train.reshape(-1,1)) # normalizing training label
 y_val = y_scaler.transform(y_val.reshape(-1,1)) # normalizing validaiton labels
 y_test = y_scaler.transform(y_test.reshape(-1,1)) # normalizing test labels
 
+# defining our model as Sequential (a linear stack of layers)
+first_model = Sequential()
+# adding our first layer to the neural network
+first_model.add(Dense(13, input_dim=13, kernel_initializer='uniform', activation='relu'))
+
+
+import pprint
+print( '\n---\nfirst_model.__dict__, ```%s```\n---\n' % pprint.pformat(first_model.__dict__) )
+
+
+# adding our ouptut layer to the neural network
+first_model.add(Dense(1, kernel_initializer='uniform'))
+
+# defining our optimizer sgd (stochastic gradient descent) and giving it a learning rate
+sgd = SGD(lr=0.03)
+
+# compiling our model we want to minimize the mean squared error and will use sgd to minimize this error
+first_model.compile(loss='mean_squared_error', optimizer=sgd)
+print( '\n---\nfirst_model.compile() just run\n---\n' )
+
+# we train our model with the train data
+# validate the model with the validation data every epoch
+# an epoch is an entire iteration through the dataset
+# batch size is how much data we are feeding into the model for a sgd update
+first_model.fit(x_train, y_train, batch_size=5, validation_data=(x_val, y_val), epochs=30)
+print( '\n---\nfirst_model.fit() just run\n---\n' )
+
