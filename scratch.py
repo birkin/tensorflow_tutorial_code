@@ -71,3 +71,39 @@ print (test_score)
 
 print( '\n---\nend of non-bonus section\n---\n' )
 
+
+################################
+# BONUS SECTION Regularization #
+################################
+
+# defining our model as Sequential (a linear stack of layers)
+regularized_model = Sequential()
+# added dropout layer to kill off input neurons with a specified probability to reduce overfitting
+regularized_model.add(Dropout(0.5, input_shape=(13,)))
+
+# adding our first layer to the neural network
+regularized_model.add(Dense(13, input_dim=13, kernel_initializer='uniform', activation='relu'))
+# added dropout layer to kill off hidden layer neurons with a specified probability to reduce overfitting
+regularized_model.add(Dropout(0.5))
+
+# adding our ouptut layer to the neural network
+regularized_model.add(Dense(1, kernel_initializer='uniform'))
+
+# defining our optimizer sgd (stochastic gradient descent) and giving it a learning rate
+sgd = SGD(lr=0.03)
+
+# compiling our model we want to minimize the mean squared error and will use sgd to minimize this error
+regularized_model.compile(loss='mean_squared_error', optimizer=sgd)
+
+# we train our model with the train data
+# validate the model with the validation data every epoch
+# an epoch is an entire iteration through the dataset
+# batch size is how much data we are feeding into the model for a sgd update
+regularized_model.fit(x_train, y_train, batch_size=5, validation_data=(x_val, y_val), epochs=30)
+
+# test our models performance on the test data
+test_score = regularized_model.evaluate(x_test, y_test)
+print ("MSE on test set:")
+print (test_score)
+
+print( '\n---\nend of bonus section\n---\n' )
