@@ -64,3 +64,10 @@ print( '\n---\nfirst_model.compile() just run\n---\n' )
 first_model.fit(x_train, y_train, batch_size=5, validation_data=(x_val, y_val), epochs=30)
 print( '\n---\nfirst_model.fit() just run\n---\n' )
 
+# test our models performance on the test data
+test_score = first_model.evaluate(x_test, y_test)
+print ("MSE on test set:")
+print (test_score)
+
+print( '\n---\nend of non-bonus section\n---\n' )
+
