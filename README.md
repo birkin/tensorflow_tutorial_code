@@ -1,5 +1,7 @@
 workshop notes
 
+- with virtual environment activated: `pip install -r ./requirements.txt`
+
 - from: <http://compneuro.clps.brown.edu/datathon_2017/>
 
 - 11/17, 11am – 1pm: Tensorflow/Keras and neural data analysis in Biomed B13
