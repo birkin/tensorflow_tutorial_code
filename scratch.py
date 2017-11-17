@@ -23,3 +23,17 @@ print ("Shape of your test matrix and labels:")
 print (np.shape(x_test)) # (106, 13): 106 rows/samples and 13 columns/features
 print (np.shape(y_test)) # (106,): 106 labels correspoding to the test features
 print(' ')
+
+# preprocessing your data
+# normalizing feature matrix
+x_scaler = preprocessing.StandardScaler().fit(x_train) # we normalize with the training features
+x_train = x_scaler.transform(x_train) # normalizing training features
+x_val = x_scaler.transform(x_val) # normalizing validation features
+x_test = x_scaler.transform(x_test) # normalizing test features
+
+# normalizing target labels
+y_scaler = preprocessing.StandardScaler().fit(y_train.reshape(-1,1)) # we normalize with the training labels
+y_train = y_scaler.transform(y_train.reshape(-1,1)) # normalizing training labels
+y_val = y_scaler.transform(y_val.reshape(-1,1)) # normalizing validaiton labels
+y_test = y_scaler.transform(y_test.reshape(-1,1)) # normalizing test labels
+
